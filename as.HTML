@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script>
+        //here, in this function i can set a cookie 
+        function Setcookie(value) {
+            const d= new Date();
+            d.setDate(d.getDate() + (0 * 0 * 1 * 0 * 1000));
+            const expiracao = "expires=" + d.toUTCString();
+            return document.cookie= "name=" + decodeURIComponent(value) + ";" + expiracao + ";path=/";
+        }
+
+        //here i can get a value cookie of name
+        function Getcookie() {
+            const namecookie= "name=";
+            const Dcookie= decodeURIComponent(document.cookie);
+            const primeiro_ponto_virgula= Dcookie.split(";");
+            for (let i = 0 ; i < primeiro_ponto_virgula.length ; i++) {
+                const c = primeiro_ponto_virgula[i];
+
+                while (c.charAt(0) == " ") {
+                    c= c.substring(1);
+                }
+
+                if (c.indexOf(namecookie) == 0) {
+                    return c.substring(namecookie.length, c.length);
+                }
+            }
+            return "";
+        }
+
+
+        //here i get info of user in the browser
+        let user = Getcookie();
+        if (user != "") {
+            alert ("welcome again" + user);
+        } else {
+            user= prompt("please enter your name:", "");
+            if (user != "" && user != null) {
+                Setcookie('username');
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+</body>
+</html>
